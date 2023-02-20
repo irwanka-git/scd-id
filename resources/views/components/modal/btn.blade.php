@@ -1,0 +1,1 @@
+<a href="#" class="btn btn-{{$class}}" data-bs-toggle="modal" data-bs-target="#{{$target}}">{!!$label!!}</a>

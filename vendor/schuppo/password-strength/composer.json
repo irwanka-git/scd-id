@@ -1,0 +1,50 @@
+{
+    "name": "schuppo/password-strength",
+    "description": "This package provides a validator for ensuring strong passwords in Laravel 4 applications.",
+    "keywords": [
+        "laravel",
+        "laravel5",
+        "laravel 5",
+        "validation",
+        "password",
+        "password strength"
+    ],
+    "authors": [
+        {
+            "name": "Oliver Schupp",
+            "email": "oliver.schupp@yahoo.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "illuminate/support": "^5.1|^6.0|^7.0",
+        "illuminate/translation": "^5.1|6.*|7.*"
+    },
+    "require-dev": {
+        "illuminate/validation": "~5.1|6.*|7.*",
+        "phpunit/phpunit": "^6.0|^7.0|^8.0",
+        "orchestra/testbench": "^3.5|^4.0|^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Schuppo\\PasswordStrength\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Schuppo\\PasswordStrength\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Schuppo\\PasswordStrength\\PasswordStrengthServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "config": {
+        "discard-changes": true
+    }
+}

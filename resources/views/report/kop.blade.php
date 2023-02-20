@@ -1,0 +1,1 @@
+<img src="{{'/kop/'.$biro->kop_biro}}" style="width: 100% !important;" width="100%">

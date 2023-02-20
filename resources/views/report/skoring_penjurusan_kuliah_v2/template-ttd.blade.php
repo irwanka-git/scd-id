@@ -1,0 +1,1 @@
+Mengetahui,<br>Kasubsipsi Lanud Iswahjudi<br>Staf ahli Psikologi SMA 3 Taruna Angkasa Madiun,<br><br><br><br><br>Manggala Purwakancana N., M. Psi., Psikolog<br>Mayor Kes NRP 539542 
