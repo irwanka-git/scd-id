@@ -65,25 +65,7 @@ class QuizConverter
         $uploadResult = $defaultBucket->upload($file_content,['name'=>$filename, 'predefinedAcl' => 'publicRead']);
 
         $url_plaintext = "https://storage.googleapis.com/sicerdas-indonesia.appspot.com/".$uuid.".json";
-
-        //file encrypt
-        $uuid = QuizConverter::genUUID();
-        $filename = $uuid.".json";
-        $soal_ecrypt = QuizConverter::encryptContent(json_encode($soal));
-        $session_encrypt = QuizConverter::encryptContent(json_encode($list_session));
-        $data = ['session'=>$session_encrypt, 'soal'=>$soal_ecrypt];
-        StorageLaravel::put($filename, json_encode($data));
-
-        $credentials = app_path('firebase-key.json');
-        $factory = (new Factory)->withServiceAccount($credentials);
-        $storage = $factory->createStorage();
-        $defaultBucket = $storage->getBucket();
-        $file_content = StorageLaravel::get($filename);
-        $uploadResult = $defaultBucket->upload($file_content,['name'=>$filename, 'predefinedAcl' => 'publicRead']);
-
-        $url_encrypt = "https://storage.googleapis.com/sicerdas-indonesia.appspot.com/".$uuid.".json";
-
-        $result = ['url_plaintext'=>$url_plaintext, 'url_encrypt'=>$url_encrypt];
+        $result = ['url_plaintext'=>$url_plaintext, 'url_encrypt'=>""];
         return json_decode(json_encode($result));
     }
 
