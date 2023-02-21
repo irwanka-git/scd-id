@@ -54,8 +54,7 @@ class QuizConverter
         $uuid = QuizConverter::genUUID();
         $filename = $uuid.".json";
         $data = ['session'=>$list_session, 'soal'=>$soal];
-        return $data;
-        
+                
         StorageLaravel::put($filename, json_encode($data));
 
         $credentials = app_path('firebase-key.json');
