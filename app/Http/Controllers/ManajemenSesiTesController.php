@@ -611,7 +611,7 @@ class ManajemenSesiTesController extends Controller
                 $record_quiz = array(                                              
                     "open"=> $open == 1 ? 0 : 1,
                     "json_url"=>$convert->url_plaintext,
-                    "json_url_encrypt"=>$convert->url_encrypt,
+                    "json_url_encrypt"=>"",
                 );
             }else{
                 $record_quiz = array(                                              

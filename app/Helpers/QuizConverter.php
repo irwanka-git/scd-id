@@ -52,7 +52,7 @@ class QuizConverter
 
         //file normal
         $uuid = QuizConverter::genUUID();
-        $filename = $uuid.".json";
+        $filename = date("Ymd").$uuid.".json";
         $data = ['session'=>$list_session, 'soal'=>$soal];
                 
         StorageLaravel::put($filename, json_encode($data));
@@ -65,7 +65,7 @@ class QuizConverter
         $uploadResult = $defaultBucket->upload($file_content,['name'=>$filename, 'predefinedAcl' => 'publicRead']);
 
         $url_plaintext = "https://storage.googleapis.com/sicerdas-indonesia.appspot.com/".$uuid.".json";
-        $result = ['url_plaintext'=>$url_plaintext, 'url_encrypt'=>""];
+        $result = ['url_plaintext'=>$url_plaintext];
         return json_decode(json_encode($result));
     }
 
