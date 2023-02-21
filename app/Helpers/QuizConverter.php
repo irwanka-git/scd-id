@@ -39,7 +39,7 @@ class QuizConverter
     }
 
     static function convert_quiz_json($token){
-
+        ini_set('max_execution_time', '300'); //300 seconds = 5 minutes
         $list_session = QuizConverter::get_data_from_api("/get-info-session/".$token);
         $soal = array();
         foreach($list_session as $r){
