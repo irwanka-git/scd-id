@@ -64,7 +64,7 @@ class QuizConverter
         $file_content = StorageLaravel::get($filename);
         $uploadResult = $defaultBucket->upload($file_content,['name'=>$filename, 'predefinedAcl' => 'publicRead']);
 
-        $url_plaintext = "https://storage.googleapis.com/sicerdas-indonesia.appspot.com/".$uuid.".json";
+        $url_plaintext = "https://storage.googleapis.com/sicerdas-indonesia.appspot.com/".$filename;
         $result = ['url_plaintext'=>$url_plaintext];
         return json_decode(json_encode($result));
     }
