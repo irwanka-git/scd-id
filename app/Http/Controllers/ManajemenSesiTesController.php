@@ -630,6 +630,28 @@ class ManajemenSesiTesController extends Controller
         }
     }
 
+    function submit_upload_soal_firebase(Request $r){
+        if($this->ucu()){
+            loadHelper('format');
+            $uuid = $r->uuid;
+            ini_set('max_execution_time', '1300'); //300 seconds = 5 minutes
+            $quiz = DB::table('quiz_sesi')->where('uuid', $uuid)->first();
+            $convert = QuizConverter::convert_quiz_json($quiz->token);
+            $open = DB::table('quiz_sesi')->where('uuid', $uuid)->first()->open;
+            $record_quiz = array(                                              
+                    "json_url"=>$convert->url_plaintext,
+                    "json_url_encrypt"=>"",
+                );
+            DB::table('quiz_sesi')->where('uuid', $uuid)->update($record_quiz);
+            $respon = array('status'=>true,'message'=>"Berhasil Upload Soal ke Firebase");
+            return response()->json($respon);
+           
+        }else{
+            $respon = array('status'=>false,'message'=>'Akses Ditolak!');
+            return response()->json($respon);
+        }
+    }
+
     function submit_delete(Request $r){
         if($this->ucd()){
             loadHelper('format');

@@ -172,10 +172,14 @@ $back_url = Request::get('back');
 					</div>
 
 					<div class="tab-pane  p-1 pt-4 fade " id="daftar-sesi" role="tabpanel" aria-labelledby="sesi-tab">
-						@if($isAdminSistem && $quiz->open==1)
-						<a href="{{$quiz->json_url}}" target="_blank" class="btn btn-secondary"><i class="la la-archive"></i> Download Soal / Konfigurasi</a>
+						@if($quiz->open!=1)
+						<button id="btn-upload-soal"  class="btn  btn-outline-success btn-block"><i class="las la-database"></i>Upload Soal (Firebase)</button>&nbsp;
+						@endif
+						@if($quiz->json_url!="")
+						<a href="{{$quiz->json_url}}" target="_blank" class="btn btn-outline-secondary"><i class="la la-archive"></i> Download Soal / Konfigurasi</a>
 						<hr>
 						@endif
+
 						<h4>Daftar Urutan Sesi Tes</h4>
 						<hr>
 						<table  class="table table-striped table-hover table-sm" style="width:100%">
@@ -300,6 +304,10 @@ $back_url = Request::get('back');
 {{ Form::bsClose()}}
 
 {{ Form::bsOpen('form-status',url($main_path."/update-status")) }}
+{{ Form::bsHidden('uuid',$quiz->uuid) }}
+{{ Form::bsClose()}}
+
+{{ Form::bsOpen('form-upload-soal',url($main_path."/upload-soal-firebase")) }}
 {{ Form::bsHidden('uuid',$quiz->uuid) }}
 {{ Form::bsClose()}}
 
@@ -693,6 +701,22 @@ $back_url = Request::get('back');
 				}
 		});
 
+
+		$('#form-upload-soal').ajaxForm({
+			beforeSubmit: function() {},
+			success: function($respon) {
+				if ($respon.status == true) {
+					successNotify($respon.message);
+					location.reload();
+						//$tabel1.ajax.reload(null, true);
+					} else {
+						errorNotify($respon.message);
+					}
+				},
+				error: function() {
+					errorNotify('Terjadi Kesalahan!');
+				}
+		});
 		
 
 			$('#btn-konfirm-status').on('click', function(e) {
@@ -720,6 +744,10 @@ $back_url = Request::get('back');
 						errorNotify(respon.message);
 					}
 				})
+			})
+
+			$('#btn-upload-soal').on('click', function(e) {
+				$("#form-upload-soal").submit();
 			})
 
 			@if($isAdminSistem)

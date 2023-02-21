@@ -410,6 +410,8 @@ Route::group(["middleware"=>['auth.login','auth.menu']], function(){
 		Route::post('/update-waktu', 'ManajemenSesiTesController@submit_update_waktu');
 		Route::post('/update-asesor', 'ManajemenSesiTesController@submit_update_asesor');
 		Route::post('/update-status', 'ManajemenSesiTesController@submit_update_status');
+		Route::post('/upload-soal-firebase', 'ManajemenSesiTesController@submit_upload_soal_firebase');
+
 		Route::post('/delete', 'ManajemenSesiTesController@submit_delete');
  		Route::post('/upload-gambar', 'UploadController@upload_gambar_400_250');
  		Route::post('/upload-ttd', 'UploadController@upload_gambar_250_150');
