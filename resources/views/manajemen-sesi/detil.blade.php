@@ -1362,7 +1362,7 @@ $back_url = Request::get('back');
 			@endif
 
 
-			@if($quiz->skoring_tabel=='skoring_minat_smk')
+			@if($quiz->skoring_tabel=='skoring_minat_smk' || $quiz->skoring_tabel=='skoring_minat_smk_v2')
 				$.get('{{url($main_path."/page-mapping-smk/".$quiz->uuid)}}', function(respon){
 					$("#addons-pilihan-smk").html(respon);
 				});
