@@ -39,7 +39,7 @@ class QuizConverter
     }
 
     static function convert_quiz_json($token){
-        ini_set('max_execution_time', '300'); //300 seconds = 5 minutes
+       
         $list_session = QuizConverter::get_data_from_api("/get-info-session/".$token);
         $soal = array();
         foreach($list_session as $r){
@@ -56,7 +56,7 @@ class QuizConverter
         $data = ['session'=>$list_session, 'soal'=>$soal];
                 
         StorageLaravel::put($filename, json_encode($data));
-
+         ini_set('max_execution_time', '1300'); //300 seconds = 5 minutes
         $credentials = app_path('firebase-key.json');
         $factory = (new Factory)->withServiceAccount($credentials);
         $storage = $factory->createStorage();
