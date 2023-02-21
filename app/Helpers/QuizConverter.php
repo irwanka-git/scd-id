@@ -52,7 +52,7 @@ class QuizConverter
 
         //file normal
         $uuid = QuizConverter::genUUID();
-        $filename = date("Ymd").$uuid.".json";
+        $filename = date("Ymdhis").".json";
         $data = ['session'=>$list_session, 'soal'=>$soal];
                 
         StorageLaravel::put($filename, json_encode($data));
