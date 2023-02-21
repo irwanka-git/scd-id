@@ -855,7 +855,7 @@ class ApiDataController  extends ApiController
 			}
 
 			if($r->image_base64){
-				$gambar =  'data:image/'.$r->type_image.';base64,'.$r->image_base64;
+				//$gambar =  'data:image/'.$r->type_image.';base64,'.$r->image_base64;
 
 			}
 			
