@@ -90,12 +90,11 @@ $back_url = Request::get('back');
 						<button class="nav-link " id="sesi-tab" data-bs-toggle="tab" data-bs-target="#daftar-sesi" type="button" role="tab" aria-controls="daftar-sesi" aria-selected="true">Informasi Sesi</button>
 					</li>
 					<!-- TAMBAHAN KHUSUS -->
-					@if($quiz->skoring_tabel=='skoring_minat_smk')
+					@if($quiz->skoring_tabel=='skoring_minat_smk' || $quiz->skoring_tabel=='skoring_minat_smk_v2')
 					<li class="nav-item" role="presentation">
 						<button class="nav-link " id="sesi-tab" data-bs-toggle="tab" data-bs-target="#addons-pilihan-smk" type="button" role="tab" aria-controls="daftar-sesi" aria-selected="true">Pilihan SMK</button>
 					</li>
-					@endif
-					 
+					@endif					 
 					<!-- TAMBAHAN KHUSUS -->
 				</ul>
 				<div class="tab-content" id="myTabContent">
