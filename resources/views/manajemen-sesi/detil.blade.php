@@ -175,7 +175,6 @@ $back_url = Request::get('back');
 					<div class="tab-pane  p-1 pt-4 fade " id="daftar-sesi" role="tabpanel" aria-labelledby="sesi-tab">
 						@if($isAdminSistem && $quiz->open==1)
 						<a href="{{$quiz->json_url}}" target="_blank" class="btn btn-secondary"><i class="la la-archive"></i> Download Soal / Konfigurasi</a>
-						<a href="{{$quiz->json_url_encrypt}}" target="_blank" class="btn btn-secondary"><i class="la la-archive"></i> Download Soal / Konfigurasi (Encrypt)</a>
 						<hr>
 						@endif
 						<h4>Daftar Urutan Sesi Tes</h4>

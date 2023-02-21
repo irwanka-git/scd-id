@@ -606,6 +606,7 @@ class ManajemenSesiTesController extends Controller
             
             $open = DB::table('quiz_sesi')->where('uuid', $uuid)->first()->open;
             if(!$open){
+                ini_set('max_execution_time', '1300'); //300 seconds = 5 minutes
                 $quiz = DB::table('quiz_sesi')->where('uuid', $uuid)->first();
                 $convert = QuizConverter::convert_quiz_json($quiz->token);
                 $record_quiz = array(                                              
