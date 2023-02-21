@@ -218,7 +218,7 @@ $back_url = Request::get('back');
 						</table>
 					</div>
 
-					@if($quiz->skoring_tabel=='skoring_minat_smk')
+					@if($quiz->skoring_tabel=='skoring_minat_smk' || $quiz->skoring_tabel=='skoring_minat_smk_v2')
 						<div class="tab-pane p-1 pt-4 fade " id="addons-pilihan-smk" role="tabpanel" aria-labelledby="sesi-tab">
 						</div>
 					@endif
