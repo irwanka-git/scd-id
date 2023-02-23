@@ -1283,7 +1283,7 @@ class ManajemenSesiTesController extends Controller
         $status_hasil = $r->publish;
 
         if($status_hasil==1){
-           return  $this->generate_pdf_report_peserta($uuid);
+            $this->generate_pdf_report_peserta($uuid);
         }
 
         DB::table('quiz_sesi_user')->where('uuid', $uuid)->update(['saran'=>$saran,'status_hasil'=>$status_hasil]);
@@ -1347,7 +1347,7 @@ class ManajemenSesiTesController extends Controller
         $filename = $nama_peserta.'-'.$no_seri.'.pdf';
         $command = env('WKHTML').' --footer-spacing 3 -L 10 -R 10 -T 10  -B 20 --footer-left "Si Cerdas Indonesia"  --footer-right '.$no_seri.'  --footer-font-size 9 --footer-center [page]/[topage] -O Portrait  -s Folio '.$url.' '.$path.$filename;
         
-        return $command;
+       // return $command;
         // exit();
         
         $process = new Process($command);
