@@ -426,7 +426,7 @@ class SkoringMinatSMKV2 extends Command
             foreach ($current_rangking as $cr){
                 $no = $cr->no;
                 $update_minat['km_'.$ke] = $no;
-                $minat_ke++;
+                $ke++;
             }
             DB::table($tabel_skoring_induk)
                     ->where('id_quiz', $id_quiz)
