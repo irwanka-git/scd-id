@@ -544,6 +544,82 @@ class SkoringMinatSMKV2 extends Command
 
     }
 
+
+    public function skoring_kuliah_ipa ($id_quiz){
+
+        $tabel_skoring_induk = $this->tabel_skoring_induk;
+        $kategori = 'SKALA_PMK_MINAT_ILMU_ALAM';
+        echo  $this->space1."Mulai Skoring ".$kategori." \n";
+        $sesi_user = DB::table('quiz_sesi_user')   
+                        ->select('id_quiz','id_user')
+                        ->where('id_quiz', $id_quiz)
+                        ->where('submit', 1)        //sudah submit
+                        ->where('skoring',0)
+                        ->where('status_hasil', 0)  //hasil belum ada
+                        ->get();
+        foreach($sesi_user as $su){
+            $id_user = $su->id_user; 
+            $id_quiz = $su->id_quiz;
+
+            $jawaban = DB::table('quiz_sesi_user_jawaban')
+                                ->where('id_quiz', $id_quiz)
+                                ->where('kategori', $kategori)
+                                ->where('id_user', $id_user)
+                                ->orderby('urutan','asc')
+                                ->get();
+            $record = [];
+            foreach ($jawaban as $r){
+                $jawaban = (int)$r->jawaban; //ubah ke INTEGER SESUAI FORMAT
+                $record['minat_ipa'.$r->urutan] = $jawaban;
+            }
+
+            DB::table($tabel_skoring_induk)
+                        ->where('id_quiz', $id_quiz)
+                        ->where('id_user', $id_user)
+                        ->update($record);
+        }
+
+        echo  $this->space1."Berhasil Skoring ".$kategori." \n";
+    }
+
+    //rekom kuliah IPS
+    public function skoring_kuliah_ips ($id_quiz){
+
+        $tabel_skoring_induk = $this->tabel_skoring_induk;
+        $kategori = 'SKALA_PMK_MINAT_ILMU_SOSIAL';
+        echo  $this->space1."Mulai Skoring ".$kategori." \n";
+        $sesi_user = DB::table('quiz_sesi_user')   
+                        ->select('id_quiz','id_user')
+                        ->where('id_quiz', $id_quiz)
+                        ->where('submit', 1)        //sudah submit
+                        ->where('skoring',0)
+                        ->where('status_hasil', 0)  //hasil belum ada
+                        ->get();
+        foreach($sesi_user as $su){
+            $id_user = $su->id_user; 
+            $id_quiz = $su->id_quiz;
+
+            $jawaban = DB::table('quiz_sesi_user_jawaban')
+                                ->where('id_quiz', $id_quiz)
+                                ->where('kategori', $kategori)
+                                ->where('id_user', $id_user)
+                                ->orderby('urutan','asc')
+                                ->get();
+            $record = [];
+            foreach ($jawaban as $r){
+                $jawaban = (int)$r->jawaban; //ubah ke INTEGER SESUAI FORMAT
+                $record['minat_ips'.$r->urutan] = $jawaban;
+            }
+
+            DB::table($tabel_skoring_induk)
+                        ->where('id_quiz', $id_quiz)
+                        ->where('id_user', $id_user)
+                        ->update($record);
+        }
+
+        echo  $this->space1."Berhasil Skoring ".$kategori." \n";
+    }
+    
     public function skoring_karakteristik_pribadi($id_quiz){
 
         $tabel_skoring_induk = $this->tabel_skoring_induk;
