@@ -299,7 +299,7 @@ class SkoringMinatSMKV2 extends Command
         $kategori = $this->kategori_skala_minat;
         $max_pilihan = DB::table('quiz_sesi_mapping_smk')->where('id_quiz', $id_quiz)->count();
         $skor_maksimal = $max_pilihan; //5 Pilihan Tergantung SMK Lokasi Tes
-         
+
         
         echo  $this->space1."Mulai Skoring ".$kategori." \n";
 
@@ -420,12 +420,12 @@ class SkoringMinatSMKV2 extends Command
                     ->limit($skor_maksimal)
                     ->get();
             //ambil sebanayak $max
-            $minat_ke = 1;
+            $ke = 1;
             $update_minat = [];
             //var_dump($current_rangking);
             foreach ($current_rangking as $cr){
                 $no = $cr->no;
-                $update_minat['minat_dinas'.$minat_ke] = $no;
+                $update_minat['km_'.$ke] = $no;
                 $minat_ke++;
             }
             DB::table($tabel_skoring_induk)
