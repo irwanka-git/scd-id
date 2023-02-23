@@ -123,7 +123,8 @@ class SkoringMinatSMKV2 extends Command
                 $this->skoring_minat_smk_v2($qz->id_quiz);
                 $this->skala_kecerdasan_majemuk($qz->id_quiz);
                 $this->skoring_gaya_pekerjaan($qz->id_quiz);
-                
+                $this->skoring_kuliah_ipa($qz->id_quiz);
+                $this->skoring_kuliah_ips($qz->id_quiz);
                 $this->skoring_karakteristik_pribadi($qz->id_quiz);
                 $this->finishing_skoring($qz->id_quiz);
             }
@@ -619,7 +620,7 @@ class SkoringMinatSMKV2 extends Command
 
         echo  $this->space1."Berhasil Skoring ".$kategori." \n";
     }
-    
+
     public function skoring_karakteristik_pribadi($id_quiz){
 
         $tabel_skoring_induk = $this->tabel_skoring_induk;
