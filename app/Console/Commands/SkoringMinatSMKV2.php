@@ -299,7 +299,9 @@ class SkoringMinatSMKV2 extends Command
         $kategori = $this->kategori_skala_minat;
         $max_pilihan = DB::table('quiz_sesi_mapping_smk')->where('id_quiz', $id_quiz)->count();
         $skor_maksimal = $max_pilihan; //5 Pilihan Tergantung SMK Lokasi Tes
-
+        if ($skor_maksimal > 5 ){
+            $skor_maksimal = 5;
+        }
         
         echo  $this->space1."Mulai Skoring ".$kategori." \n";
 
