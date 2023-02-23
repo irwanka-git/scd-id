@@ -26,14 +26,14 @@
 <div class="row justify-content-center mt-3 mb-2">
 	<div class="col-auto">
 		<nav class="nav btn-group">
-			<a href="#aspek-kognitif" class="btn btn-outline-primary active" data-bs-toggle="tab">TKD</a>
+			<a href="#aspek-kognitif" class="btn btn-outline-primary " data-bs-toggle="tab">TKD</a>
 			<a href="#peminatan-smk" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT SMK</a> 
 			<a href="#kecerdasan-majemuk" class="btn btn-outline-primary" data-bs-toggle="tab">KECERDASAN MAJEMUK</a>
 			<a href="#gaya-pekerjaan" class="btn btn-outline-primary" data-bs-toggle="tab">POLA GAYA PEKERJAAN</a>
 			<a href="#minat-alam" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT ILMU ALAM</a>
 			<a href="#minat-sosial" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT ILMU SOSIAL</a>
 			<a href="#karakter-pribadi" class="btn btn-outline-primary" data-bs-toggle="tab">KARAKTERISTIK PRIBADI</a>
-			<a href="#saran" class="btn btn-outline-primary" data-bs-toggle="tab">SARAN / REKOM</a>
+			<a href="#saran" class="btn btn-outline-primary active" data-bs-toggle="tab">SARAN / REKOM</a>
 		</nav>
 	</div>
 </div>
