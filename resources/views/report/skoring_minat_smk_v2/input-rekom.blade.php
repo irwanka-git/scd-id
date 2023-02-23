@@ -124,16 +124,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane py-2 fade" id="saran">
-		<div class="card">
-			<div class="card-body">
-				<div>
-					 
-				</div>
-				@include("report.".$data_sesi->skoring_tabel.".saran")
-			</div>
-		</div>
-	</div>
+	 
 </div>
 <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script type="text/javascript">
