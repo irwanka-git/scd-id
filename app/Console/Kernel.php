@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
             Commands\SkoringJurusanKuliahVERSI2::class,
             Commands\SkoringTestIQdanEQ::class,
             Commands\TestingGETDATAAPI::class,
+            Commands\SkoringMinatSMKV2::class,
     ];
 
     /**
