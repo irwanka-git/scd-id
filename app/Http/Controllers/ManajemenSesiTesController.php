@@ -1283,7 +1283,7 @@ class ManajemenSesiTesController extends Controller
         $status_hasil = $r->publish;
 
         if($status_hasil==1){
-             $this->generate_pdf_report_peserta($uuid);
+             return $this->generate_pdf_report_peserta($uuid);
         }
 
         DB::table('quiz_sesi_user')->where('uuid', $uuid)->update(['saran'=>$saran,'status_hasil'=>$status_hasil]);
@@ -1308,7 +1308,7 @@ class ManajemenSesiTesController extends Controller
     
 
     function generate_pdf_report_peserta($uuid){
-
+        $command_console = "";
         $quiz_sesi =DB::table('quiz_sesi_user')
                         ->select('id_user','token_submit','id_quiz','id_quiz_user')
                         ->where('uuid', $uuid)
@@ -1336,7 +1336,7 @@ class ManajemenSesiTesController extends Controller
         //GENERATE COVER
        $path_cover = env('PATH_COVER'); 
        $command = "python3 ".env('PYTHON_SCRIPT')." ".$quiz_sesi->id_quiz_user;
-       // return $command;
+       $command_console = $command;
        $process = new Process($command);
        $process->run();
        $file_cover = $path_cover.$quiz_sesi->id_quiz_user.".pdf";
@@ -1346,7 +1346,8 @@ class ManajemenSesiTesController extends Controller
         $path = env('PATH_REPORT'); 
         $filename = $nama_peserta.'-'.$no_seri.'.pdf';
         $command = env('WKHTML').' --footer-spacing 3 -L 10 -R 10 -T 10  -B 20 --footer-left "Si Cerdas Indonesia"  --footer-right '.$no_seri.'  --footer-font-size 9 --footer-center [page]/[topage] -O Portrait  -s Folio '.$url.' '.$path.$filename;
-        
+
+        $command_console = $command_console ." ".$command;
        // return $command;
         // exit();
         
@@ -1371,7 +1372,7 @@ class ManajemenSesiTesController extends Controller
             $command = env('WKHTML').' --footer-spacing 3 -L 10 -R 10 -T 10  -B 20 --footer-left "Si Cerdas Indonesia"  --footer-right '.$no_seri.'  --footer-font-size 9 --footer-center [page]/[topage] -O Landscape  -s Folio '.$url.' '.$path.$filename_lampiran;
             $process = new Process($command);
             $process->run();
-
+            $command_console = $command_console ." ".$command;
              //gabungkan file pdf
              //pake PDFUNITE https://www.sbarjatiya.com/notes_wiki/index.php/CentOS_7.x_pdfunite
              //pdfunite 839831277_report_sicerdas.pdf 606349316_report_sicerdas.pdf merge.pdf
@@ -1387,6 +1388,7 @@ class ManajemenSesiTesController extends Controller
             $filename_awal = $filename;
             $filename = $nama_peserta.'-'.$no_seri.'report.pdf';
             $command = "pdfunite ".$file_cover." ".$path.$filename_awal." ".$path.$filename;
+             $command_console = $command_console ." ".$command;
             //echo  $command;
             // echo  $command;
             // exit();
@@ -1412,6 +1414,7 @@ class ManajemenSesiTesController extends Controller
         DB::table('seri_cetakan')->insert($cetakan);
         //tambahan export word report
         //dd($cetakan);
+        return $command_console = $command_console ." ".$command;
         ExportWordReport::GenerateReportWordQuizPeserta($quiz_sesi->id_quiz, $quiz_sesi->id_user);
     }
 
