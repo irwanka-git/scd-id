@@ -1283,7 +1283,7 @@ class ManajemenSesiTesController extends Controller
         $status_hasil = $r->publish;
 
         if($status_hasil==1){
-            $this->generate_pdf_report_peserta($uuid);
+           return  $this->generate_pdf_report_peserta($uuid);
         }
 
         DB::table('quiz_sesi_user')->where('uuid', $uuid)->update(['saran'=>$saran,'status_hasil'=>$status_hasil]);
@@ -1336,7 +1336,7 @@ class ManajemenSesiTesController extends Controller
         //GENERATE COVER
         $path_cover = env('PATH_COVER'); 
         $command = "python3 ".env('PYTHON_SCRIPT')." ".$quiz_sesi->id_quiz_user;
-        //echo  $command;
+        return $command;
         $process = new Process($command);
         $process->run();
         $file_cover = $path_cover.$quiz_sesi->id_quiz_user.".pdf";
