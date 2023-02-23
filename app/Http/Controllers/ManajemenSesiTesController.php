@@ -1347,8 +1347,8 @@ class ManajemenSesiTesController extends Controller
         $filename = $nama_peserta.'-'.$no_seri.'.pdf';
         $command = env('WKHTML').' --footer-spacing 3 -L 10 -R 10 -T 10  -B 20 --footer-left "Si Cerdas Indonesia"  --footer-right '.$no_seri.'  --footer-font-size 9 --footer-center [page]/[topage] -O Portrait  -s Folio '.$url.' '.$path.$filename;
         
-        // echo  $command;
-        //  exit();
+        echo  $command;
+        exit();
         
         $process = new Process($command);
         $process->run();
