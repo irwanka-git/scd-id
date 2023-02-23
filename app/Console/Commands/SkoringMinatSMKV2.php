@@ -122,6 +122,7 @@ class SkoringMinatSMKV2 extends Command
                 $this->skoring_kognitif($qz->id_quiz);
                 $this->skoring_minat_smk_v2($qz->id_quiz);
                 $this->skala_kecerdasan_majemuk($qz->id_quiz);
+                $this->skoring_gaya_pekerjaan($qz->id_quiz);
                 
                 $this->skoring_karakteristik_pribadi($qz->id_quiz);
                 $this->finishing_skoring($qz->id_quiz);
@@ -436,7 +437,112 @@ class SkoringMinatSMKV2 extends Command
         echo  $this->space1."Berhasil Skoring ".$kategori." \n";
     }
 
-     
+    public function skoring_gaya_pekerjaan($id_quiz){
+
+        $referensi_komponen = DB::table('ref_komponen_gaya_pekerjaan')->get();
+        $kode_komponen = array();
+        foreach($referensi_komponen as $r){
+            $kode_komponen[$r->no] = $r->kode;
+        }
+
+        $user_skoring = DB::table($this->tabel_skoring_induk)
+                    ->select('id_user', 'id_quiz')
+                    ->where('id_quiz', $id_quiz)->where('selesai_skoring',0)->get();
+        foreach($user_skoring as $r){
+            $id_user = $r->id_user;
+            $id_quiz = $r->id_quiz;
+
+            //hapus skoring terdahulu
+            DB::table("ref_skoring_gaya_pekerjaan")
+                    ->where('id_user', $id_user)
+                    ->where('id_quiz', $id_quiz)
+                    ->delete();
+
+            $data_skor = DB::select("select c.jawaban, c.c, c.t, c.u, b.*
+                    from quiz_sesi_user_jawaban as a, 
+                    soal_gaya_pekerjaan as b , 
+                    ref_skor_gaya_pekerjaan as c 
+                    where a.urutan = b.nomor 
+                    and a.id_quiz = $id_quiz 
+                    and a.id_user = $id_user
+                    and a.kategori='SKALA_GAYA_PEKERJAAN'
+                    and c.jawaban = a.jawaban");
+
+            $array_komponen = array("a","b","c","d","e","f","g","h","i","j","k","l");
+
+            $skor_komponen = array();
+            foreach($array_komponen as $n){
+                $skor_komponen[$n] = 0;
+            }
+            foreach($data_skor as $s){
+                $skor_U = $s->u;
+                $skor_T = $s->t;
+                $skor_C = $s->c;
+                foreach($array_komponen as $n){
+                    $nama_komponen = "komponen_".$n;
+                    if($s->$nama_komponen!="" && $s->$nama_komponen!=null){
+                        $cek = substr($s->$nama_komponen, 0, 1);
+                        if($cek=="U"){
+                            $skor_komponen[$n] += $skor_U;
+                        }
+                        if($cek=="T"){
+                            $skor_komponen[$n] += $skor_T;
+                        }
+                        if($cek=="C"){
+                            $skor_komponen[$n] += $skor_C;
+                        }
+                    }
+                }
+            }
+
+            arsort($skor_komponen);//urutkan rangking
+            $record_skoring_induk = array();
+            $batas_rangking = 3;
+            $rangking = 1;
+            foreach($skor_komponen as $key => $value){
+                $nama_komponen = "komponen_".$key;
+                //echo $kode_komponen[$key] ."\t: ".$value."\n";
+                $field_name = "gp_".$key; 
+                $record_skoring_induk[$field_name] = $value;
+
+                if($rangking<=$batas_rangking){
+                    $field_rangking = "rangking_gp".$rangking;
+                    $record_skoring_induk[$field_rangking] = $kode_komponen[$key];
+                }
+
+                $record_ref_skoring = array("id_user"=>$id_user, 
+                                            "id_quiz"=>$id_quiz, 
+                                            "kode"=>$kode_komponen[$key],
+                                            "skor"=>$value, 
+                                            "rangking"=>$rangking);
+
+                DB::table("ref_skoring_gaya_pekerjaan")->insert($record_ref_skoring);
+                $rangking++;
+            }
+            //var_dump($record_skoring_induk);
+            DB::table($this->tabel_skoring_induk)
+                    ->where('id_user', $id_user)
+                    ->where('id_quiz', $id_quiz)
+                    ->update($record_skoring_induk);
+
+            //update klasifikasi skor gaya pekerjaan
+            $update_klasifikasi = DB::select("select a.id,   a.skor, b.akronim as klasifikasi
+                        from ref_skoring_gaya_pekerjaan  as a, 
+                        ref_klasifikasi_gaya_kerja as b  
+                        where a.skor >= b.skor_min and a.skor <= b.skor_max  
+                        and a.id_quiz = $id_quiz and a.id_user = $id_user
+                        order by a.rangking");
+
+            foreach($update_klasifikasi as $u){
+                DB::table('ref_skoring_gaya_pekerjaan')
+                    ->where('id', $u->id)
+                    ->update(['klasifikasi'=>$u->klasifikasi]);
+            }
+        }
+
+        echo  $this->space1."Berhasil Skoring Gaya Pekerjaan \n";
+
+    }
 
     public function skoring_karakteristik_pribadi($id_quiz){
 
