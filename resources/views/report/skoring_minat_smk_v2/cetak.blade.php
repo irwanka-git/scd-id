@@ -86,12 +86,13 @@ $lokasi = DB::table('lokasi')->where('id_lokasi', $quiz->id_lokasi)->first();
 	<br>
 	<p class="new-page"></p>
 	@include("report.".$data_sesi->skoring_tabel.".kecerdasan-majemuk")
+	<br>
 	@include("report.".$data_sesi->skoring_tabel.".gaya-pekerjaan")
 	<p class="new-page"></p>
 	@include("report.".$data_sesi->skoring_tabel.".minat-sains")
 	<br>
 	@include("report.".$data_sesi->skoring_tabel.".minat-sosial")
-	<br>
+	<p class="new-page"></p>
 	@include("report.".$data_sesi->skoring_tabel.".karakter-pribadi")
 	<br>
 	<p class="new-page"></p>
