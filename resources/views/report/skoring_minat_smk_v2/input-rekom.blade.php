@@ -26,13 +26,14 @@
 <div class="row justify-content-center mt-3 mb-2">
 	<div class="col-auto">
 		<nav class="nav btn-group">
-			<a href="#saran" class="btn btn-outline-primary active" data-bs-toggle="tab">INPUT SARAN / REKOM</a>
-			<a href="#aspek-kognitif" class="btn btn-outline-primary" data-bs-toggle="tab">TKD</a>
-			<a href="#peminatan-sma" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT</a>
-			<a href="#sikap-pelajaran" class="btn btn-outline-primary" data-bs-toggle="tab">SIKAP</a>
-			<a href="#tmi" class="btn btn-outline-primary" data-bs-toggle="tab">TMI</a>
-			<a href="#mbti" class="btn btn-outline-primary" data-bs-toggle="tab">MBTI</a>
+			<a href="#aspek-kognitif" class="btn btn-outline-primary active" data-bs-toggle="tab">TKD</a>
+			<a href="#peminatan-smk" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT SMK</a> 
+			<a href="#kecerdasan-majemuk" class="btn btn-outline-primary" data-bs-toggle="tab">KECERDASAN MAJEMUK</a>
+			<a href="#gaya-pekerjaan" class="btn btn-outline-primary" data-bs-toggle="tab">POLA GAYA PEKERJAAN</a>
+			<a href="#minat-alam" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT ILMU ALAM</a>
+			<a href="#minat-sosial" class="btn btn-outline-primary" data-bs-toggle="tab">MINAT ILMU SOSIAL</a>
 			<a href="#karakter-pribadi" class="btn btn-outline-primary" data-bs-toggle="tab">KARAKTERISTIK PRIBADI</a>
+			<a href="#saran" class="btn btn-outline-primary" data-bs-toggle="tab">SARAN / REKOM</a>
 		</nav>
 	</div>
 </div>
@@ -48,24 +49,7 @@
 						<button type="button" class="btn-save-rekom-publish btn btn-primary"><i class="las la-paper-plane"></i> Simpan dan Publikasikan</button>
 					@endif
 					<hr>
-					<table class="table table-striped table-sm table-bordered  table-x">
-						<thead>
-							<tr>
-								<th class="text-center sm">PEMINATAN</th>
-								<th class="text-center sm">SIKAP PELAJARAN</th>
-								<th class="text-center sm">MINAT KULIAH</th>
-								<th class="text-center sm">REKOMENDASI</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td align="center">{{str_replace("_"," ",$data_skoring->rekom_minat)}}</td>
-								<td align="center">{{str_replace("_"," ",$data_skoring->rekom_sikap_pelajaran)}}</td>
-								<td align="center">{{str_replace("_"," ",$data_skoring->rekom_tmi)}}</td>
-								<td align="center">{{str_replace("_"," ",$data_skoring->rekom_akhir)}}</td>
-							</tr>
-						</tbody>
-					</table>
+					 
 				</div>
 				<hr>
 				@if($data_sesi->status_hasil==0)
@@ -90,45 +74,63 @@
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane py-2 fade " id="aspek-kognitif">
+	 <div class="tab-pane py-2 fade show active" id="aspek-kognitif">
 		<div class="card">
 			<div class="card-body">
 				@include("report.".$data_sesi->skoring_tabel.".kognitif")
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane py-2 fade" id="peminatan-sma">
+	<div class="tab-pane py-2 fade" id="peminatan-smk">
 		<div class="card">
 			<div class="card-body">
 				@include("report.".$data_sesi->skoring_tabel.".minat-smk")
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane py-2 fade" id="sikap-pelajaran">
+	 
+	<div class="tab-pane py-2 fade" id="kecerdasan-majemuk">
 		<div class="card">
 			<div class="card-body">
-				@include("report.".$data_sesi->skoring_tabel.".sikap-pelajaran")
+				 @include("report.".$data_sesi->skoring_tabel.".kecerdasan-majemuk")
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane py-2 fade" id="tmi">
+	<div class="tab-pane py-2 fade" id="gaya-pekerjaan">
 		<div class="card">
 			<div class="card-body">
-				@include("report.".$data_sesi->skoring_tabel.".tmi")
+				  @include("report.".$data_sesi->skoring_tabel.".gaya-pekerjaan")
 			</div>
 		</div>
 	</div>
-	<div class="tab-pane py-2 fade" id="mbti">
+	<div class="tab-pane py-2 fade" id="minat-alam">
 		<div class="card">
 			<div class="card-body">
-				@include("report.".$data_sesi->skoring_tabel.".mbti")
+				  @include("report.".$data_sesi->skoring_tabel.".minat-sains")
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane py-2 fade" id="minat-sosial">
+		<div class="card">
+			<div class="card-body">
+				  @include("report.".$data_sesi->skoring_tabel.".minat-sosial")
 			</div>
 		</div>
 	</div>
 	<div class="tab-pane py-2 fade" id="karakter-pribadi">
 		<div class="card">
 			<div class="card-body">
-				@include("report.".$data_sesi->skoring_tabel.".karakter-pribadi")
+				 @include("report.".$data_sesi->skoring_tabel.".karakter-pribadi")
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane py-2 fade" id="saran">
+		<div class="card">
+			<div class="card-body">
+				<div>
+					 
+				</div>
+				@include("report.".$data_sesi->skoring_tabel.".saran")
 			</div>
 		</div>
 	</div>
