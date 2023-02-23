@@ -1334,12 +1334,12 @@ class ManajemenSesiTesController extends Controller
             $ketemu = DB::table('seri_cetakan')->where('no_seri', $no_seri)->count();
         }
         //GENERATE COVER
-   //    $path_cover = env('PATH_COVER'); 
-    //    $command = "python3 ".env('PYTHON_SCRIPT')." ".$quiz_sesi->id_quiz_user;
-        //return $command;
-    //    $process = new Process($command);
-   //    $process->run();
-    //    $file_cover = $path_cover.$quiz_sesi->id_quiz_user.".pdf";
+       $path_cover = env('PATH_COVER'); 
+       $command = "python3 ".env('PYTHON_SCRIPT')." ".$quiz_sesi->id_quiz_user;
+       // return $command;
+       $process = new Process($command);
+       $process->run();
+       $file_cover = $path_cover.$quiz_sesi->id_quiz_user.".pdf";
 
         //GENERATE REPORT
         $url = env('RENDER_REPORT').'/render/'.$token."_".$no_seri;
@@ -1376,9 +1376,9 @@ class ManajemenSesiTesController extends Controller
              //pake PDFUNITE https://www.sbarjatiya.com/notes_wiki/index.php/CentOS_7.x_pdfunite
              //pdfunite 839831277_report_sicerdas.pdf 606349316_report_sicerdas.pdf merge.pdf
             //pake cover
-          //  $command = "pdfunite ".$file_cover." ".$path.$filename_awal." ".$path.$filename_lampiran." ".$path.$filename;
+            $command = "pdfunite ".$file_cover." ".$path.$filename_awal." ".$path.$filename_lampiran." ".$path.$filename;
             //gak pake vover
-            $command = "pdfunite ". $path.$filename_awal." ".$path.$filename_lampiran." ".$path.$filename;
+           // $command = "pdfunite ". $path.$filename_awal." ".$path.$filename_lampiran." ".$path.$filename;
             //echo  $command;
             $process = new Process($command);
             $process->run();
